@@ -61,7 +61,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 			return
 		}
 
-		if !token.Valid {//token is invalid, maybe not signed on this server
+		if !token.Valid { //token is invalid, maybe not signed on this server
 			resposne = utils.Message(false, "token is not valid")
 			w.WriteHeader(http.StatusForbidden)
 			w.Header().Add("Content-Type", "application/json")
@@ -69,6 +69,5 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 			return
 		}
 
-		
 	})
 }
