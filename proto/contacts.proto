@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package contacts;
+
+service ContactsService {
+    //validate contac
+    rpc Validate(Request) returns(ValidateResponse);
+    //create contact
+    rpc Create(Request) returns(Response);
+    //get only one contact
+    rpc GetContact(GetContactRequest) returns(GetContactResponse);
+}
+
+enum Status {
+    INVALID = 0;
+    VALID = 1;
+}
+
+message Contact {
+    //User id
+    string userID = 1;
+    string name = 2;
+    string phone = 3;
+    Status status = 4;
+}
+
+message Request {
+    Contact contact = 1;
+}
+
+message Response {
+    int64 errorCode = 1;
+    string messageCode = 2;
+}
+
+message ValidateResponse {
+    int64 errorCode = 1;
+    string messageCode = 2;
+    Status status = 3;
+}
+
+message GetContactRequest {
+    //user id
+    string userID = 1;
+}
+
+message GetContactResponse {
+    int64 errorCode = 1;
+    string messageCode = 2;
+    Contact contact = 3;
+}
